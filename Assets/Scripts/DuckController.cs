@@ -7,7 +7,7 @@ public class DuckController : MonoBehaviour
 {
     public float MoveSpeed = 5;
     public float SteerSpeed = 180;
-    public int Gap = 30;
+    public float Gap = 30f;
     public float BodySpeed = 5;
 
     private bool hitWall = false;
@@ -38,7 +38,7 @@ public class DuckController : MonoBehaviour
         int index = 0;
         foreach (var body in BodyParts) 
         {
-            Vector3 point = PositionsHistory[Mathf.Min(index * Gap, PositionsHistory.Count-2)];
+            Vector3 point = PositionsHistory[Mathf.Min(index *(int)(Gap* Time.deltaTime), PositionsHistory.Count-2)];
             Vector3 moveDirection = point - body.transform.position;
             body.transform.position += moveDirection * BodySpeed * Time.deltaTime;
             body.transform.LookAt(point);
