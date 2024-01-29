@@ -5129,7 +5129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   SteerSpeed: 180
-  Gap: 51
+  Gap: 100
   BodySpeed: 5
   PuppyPrefab: {fileID: 1767663768970106, guid: ca9fda2f4d77c4d4f88d4ed8b939f69b, type: 3}
 --- !u!136 &1715581910
