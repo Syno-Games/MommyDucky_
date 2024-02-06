@@ -5,9 +5,11 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class DuckController : MonoBehaviour
 {
+    [SerializeField] private DynamicJoystick dynamicJoystic;
+
     public float MoveSpeed = 5;
     public float SteerSpeed = 180;
-    public float Gap = 30f;
+    public int Gap = 30;
     public float BodySpeed = 5;
 
     private bool hitWall = false;
@@ -30,7 +32,8 @@ public class DuckController : MonoBehaviour
         // move forward
         transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 
-        float steerDirection = Input.GetAxis("Horizontal");
+        //  float steerDirection = Input.GetAxis("Horizontal");
+        float steerDirection = dynamicJoystic.Horizontal;
         transform.Rotate(Vector3.up * steerDirection * SteerSpeed * Time.deltaTime);
 
         PositionsHistory.Insert(0, transform.position);
@@ -38,7 +41,7 @@ public class DuckController : MonoBehaviour
         int index = 0;
         foreach (var body in BodyParts) 
         {
-            Vector3 point = PositionsHistory[Mathf.Min(index *(int)(Gap* Time.deltaTime), PositionsHistory.Count-2)];
+            Vector3 point = PositionsHistory[Mathf.Min(index *Gap, PositionsHistory.Count-2)];
             Vector3 moveDirection = point - body.transform.position;
             body.transform.position += moveDirection * BodySpeed * Time.deltaTime;
             body.transform.LookAt(point);
